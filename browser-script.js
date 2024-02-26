@@ -13,13 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let activeTab = null;
     let tabNumber = null;
 
-
-  // function convertURL(url) {
-  //     let prefix = "https://noctura.tech/~/uv/";
-  //     let encodedURL = encodeURIComponent(url);
-  //     let convertedURL = prefix + encodedURL;
-  //     return convertedURL;
-  // }    
   
     svgElement.addEventListener('click', function () {
         const newTabElement = document.createElement('div');
@@ -71,8 +64,13 @@ document.addEventListener('DOMContentLoaded', function () {
                   closeBtn.id = `close-num-${tabID - 1}`;
                   const title = tab.querySelector('.chrome-tab-title');
                   title.id = `title-tab-num-${tabID - 1}`;
+                  const iframe = document.querySelector(`#iframe-num-${tabID}`);
+                  if (iframe) {
+                      iframe.id = `iframe-num-${tabID - 1}`;
+                  }
               }
           });
+
 
             tabs.textContent = tabs.textContent.replace(`#tab-num-${one} { transform: translate3d(${one * 239}px, 0, 0); }\n\n`, "");
             one--;
