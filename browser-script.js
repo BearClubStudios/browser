@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
             activeTab = clickedTab;
             let posX = event.clientX;
             tabNumber = Math.ceil(posX / 239) - 1;
-            //console.log('Clicked tab number:', tabNumber);
+            console.log('Clicked tab number:', tabNumber);
             const existingIframe = document.querySelector(`#iframe-num-${tabNumber}`);
             if (existingIframe) {
                 existingIframe.style.display = 'block';
