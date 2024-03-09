@@ -645,7 +645,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .chrome-tabs-302372 .chrome-tabs-bottom-bar-100459 {
-  background: #383838;
+  background: #fff;
   bottom: 0;
   height: 4px;
   left: 0;
@@ -743,387 +743,106 @@ a:hover {
 }
 body {
   margin: 0
- 
 }
-.addressbar-485342 {
+
+
+/* CSS for the modal */
+.modal {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    border: none;
-    border-radius: 30px;
-    display: flex;
-    flex: 1 1;
-    flex-wrap: nowrap;
-    flex-flow: row;
-    height: 32px;
-    min-width: 0;
-}
-
-.addressbar-menu-243006, .addressbar-urlbar-225461 {
-    border: none;
-    overflow: hidden;
-    outline: 0;
-    white-space: nowrap;
-}
-
-.addressbar-btn-745412:hover {
-    background-color: #36393f; /* Dark mode background color */
-}
-
-.addressbar-btn-745412:active {
-    background-color: #2f3136; /* Dark mode active background color */
-}
-
-.addressbar-urlbar-225461 {
-    background-color: transparent;
-    flex: 1 1;
-    font-size: 16px;
-    min-width: 0;
-    padding-right: 5px;
-    text-overflow: ellipsis;
-    color: #eee; /* Dark mode text color */
-}
-
-.addressbar-urlbar-225461::selection {
-    background-color: #9cc3f5;
-    height: 28px;
-}
-
-.addressbar-grey-821364 {
-    color: #888; /* Dark mode grey color */
-}
-
-.addressbar-menu-item-303539 {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    padding: 0 15px;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.addressbar-menu-item-icon-wrapper-996743 {
-    margin-right: 20px;
-    width: 20px;
-}
-
-.addressbar-menu-item-icon-337652 {
-    fill: #ddd; /* Dark mode icon color */
-    height: 20px;
-    width: 20px;
-}
-
-.addressbar-menu-item-303539 p {
-    margin: 12px 0;
-}
-
-.addressbar-menu-243006 {
-    align-self: flex-start;
-    background-color: #2f3136; /* Dark mode background color */
-    border-radius: 8px;
-    box-shadow: 0 0 20px 2px rgba(0, 0, 0, .2);
-    display: flex;
-    flex: 1 1;
-    flex-direction: column;
-    padding-bottom: 10px;
-    position: relative;
-    top: -4px;
-    z-index: 100;
-}
-
-.addressbar-menu-243006 input {
-    background-color: transparent;
-    border: none;
-    font-size: 16px;
-    height: 30px;
-    outline: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    color: #eee; /* Dark mode text color */
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
 }
 
-.rhnewtab-340432 {
+.modal-content {
+    background-color: #f4f4f4; /* grey background */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 80%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* shadow effect */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+
+#searchForm {
     text-align: center;
 }
 
-.rhnewtab-header-729107 {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    text-align: left;
+label {
+    font-size: 18px;
+    font-weight: bold;
 }
 
-.rhnewtab-header-stp-196575 {
-    border: 2px solid #000;
-    border-bottom-right-radius: 20px;
-    border-left: 0;
-    border-top: 0;
-    display: inline-block;
-    padding-bottom: 20px;
-    padding-right: 20px;
-    color: #eee; /* Dark mode text color */
+select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
 }
 
-.rhnewtab-header-stp-196575 input {
-    font-family: monospace, monospace;
-    width: 290px;
+
+
+.shortcuts {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #cbcbcb47;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.rhnewtab-header-stp-err-257569 {
-    color: red;
-    margin-top: 0;
+.shortcut {
+  width: calc(25% - 20px);
+  /* Adjust for 4 columns */
+  text-align: center;
+  padding: 15px;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
-.rhnewtab-header-stp-196575>div>div {
-    margin-bottom: 2px;
+.shortcut a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
 }
 
-.rhnewtab-header-ad-125024 {
-    align-self: flex-start;
-    background-color: rgba(0, 0, 0, .08);
-    border-radius: 20px;
-    display: inline-block;
-    margin: 10px;
-    padding: 10px;
-    color: #eee; /* Dark mode text color */
+.shortcut img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  /* Circular icons for a softer look */
 }
 
-.chrome-tabs-302372 .chrome-tab[is-mini]:not([active]) .chrome-tab-favicon,
-.chrome-tabs-302372 .chrome-tab[is-mini][active] .chrome-tab-close,
-.rhnewtab-discord-397494,
-.rhnewtab-header-729107>img {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.rhnewtab-header-729107>img {
-    width: 300px;
-}
-
-.rhnewtab-msg-520849 {
-    font-size: 25px;
-    color: #eee; /* Dark mode text color */
-}
-
-.rhnewtab-oldui-container-323542 {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    margin-top: 20px;
-}
-
-.rhnewtab-oldui-msg-492347 {
-    font-size: 20px;
-    margin-bottom: 5px;
-    color: #eee; /* Dark mode text color */
-}
-
-.rhnewtab-oldui-container-323542 input {
-    border: 1px solid #666; /* Dark mode input border color */
-    border-radius: 40px;
-    box-sizing: border-box;
-    font-size: 20px;
-    max-width: 800px;
-    min-width: 500px;
-    outline: 0;
-    padding: 5px 15px;
-    width: 100%;
-    color: #eee; /* Dark mode text color */
-}
-
-.rhnewtab-oldui-btn-container-102896 {
-    margin-top: 20px;
-}
-
-.rhnewtab-oldui-btn-container-102896 span {
-    border: 1px solid #666; /* Dark mode button border color */
-    border-radius: 50px;
-    cursor: pointer;
-    margin: 0 10px;
-    padding: 5px 10px;
-    transition: .2s;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.rhnewtab-oldui-btn-container-102896 span:hover {
-    background-color: #666; /* Dark mode button hover background color */
-}
-
-.rhnewtab-discord-397494 {
-    color: #ccc; /* Dark mode discord text color */
-    font-size: 20px;
-}
-
-.rhnewtab-version-container-485312 {
-    bottom: 20px;
-    color: rgba(255, 255, 255, .7); /* Dark mode version text color */
-    font-size: .8em;
-    position: absolute;
-    right: 20px;
-    text-align: right;
-}
-
-.context-menu-items-572061, .context-menu-items-572061 span, .rhnewtab-version-container-485312 p, body {
-    margin: 0;
-}
-
-.context-menu-items-enabled:hover {
-    background-color: rgba(255, 255, 255, .3); /* Dark mode menu item hover background color */
-}
-
-.browser-bar-497464 {
-    align-items: center;
-    background-color: #2f3136; /* Dark mode background color */
-    border-bottom: 1px solid #666; /* Dark mode border color */
-    display: flex;
-    flex-wrap: nowrap;
-    flex-flow: row;
-    height: 36px;
-    padding: 4px 15px;
-}
-
-.browser-bar-btn-356449 {
-    fill: #ccc; /* Dark mode button fill color */
-    stroke: #ccc; /* Dark mode button stroke color */
-    border-radius: 50%;
-    height: 20px;
-    padding: 6px;
-    transition: .2s;
-    width: 20px;
-}
-
-.browser-bar-btn-enabled:hover {
-    background-color: #666; /* Dark mode button hover background color */
-}
-
-.browser-bar-btn-enabled:active {
-    background-color: #555; /* Dark mode button active background color */
-}
-
-.context-menu-743145 {
-    background-color: #2f3136; /* Dark mode background color */
-    box-shadow: 0 0 20px 2px rgba(0, 0, 0, .4);
-    outline: 0;
-    padding: 5px 0;
-    position: absolute;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    word-break: break-all;
-    z-index: 1000;
-}
-
-.context-menu-items-disabled {
-    color: rgba(255, 255, 255, .5); /* Dark mode disabled menu item color */
-}
-
-.browser-tab-957715 {
-    display: flex;
-    flex: 1 1;
-    flex-direction: column;
-    height: 100%;
-    overflow-y: hidden;
-}
-
-.browser-tab-content-164148 {
-    flex: 1 1;
-}
-
-.browser-tab-content-iframe {
-    border: none;
-    height: 100%;
-    width: 100%;
-}
-
-.chrome-tabs-302372 {
-    background: #202124; /* Dark mode background color */
-    border-radius: 5px 5px 0 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
-    font-size: 12px;
-    height: 46px;
-    overflow: hidden;
-    padding: 8px 50px 4px 3px;
-    position: relative;
-}
-
-.chrome-tabs-302372 .chrome-tab-content-769439 {
-    height: 100%;
-    position: relative;
-    width: 100%;
-}
-
-.chrome-tabs-302372 .chrome-tab {
-    border: 0;
-    height: 36px;
-    left: 0;
-    margin: 0;
-    pointer-events: none;
-    position: absolute;
-    width: 240px;
-    z-index: 1;
-}
-
-.chrome-tabs-302372 .chrome-tab .chrome-tab-dividers:after,
-.chrome-tabs-302372 .chrome-tab .chrome-tab-dividers:before {
-    background: #4a4d51; /* Dark mode tab dividers color */
-}
-
-.chrome-tabs-302372 .chrome-tab .chrome-tab-background>svg .chrome-tab-geometry {
-    fill: #292b2e; /* Dark mode tab background color */
-}
-
-.chrome-tabs-302372 .chrome-tab[active] .chrome-tab-background>svg .chrome-tab-geometry {
-    fill: #323639; /* Dark mode active tab background color */
-}
-
-.chrome-tabs-302372 .chrome-tab .chrome-tab-title {
-    color: #9ca1a7; /* Dark mode tab title color */
-}
-
-.chrome-tabs-302372 .chrome-tab[active] .chrome-tab-title {
-    color: #f1f3f4; /* Dark mode active tab title color */
-}
-
-.chrome-tabs-302372 .chrome-tab .chrome-tab-close {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path stroke='rgba(255, 255, 255, .8)' stroke-linecap='square' stroke-width='1.5' d='M0 0 L8 8 M8 0 L0 8'></path></svg>");
-}
-
-.chrome-tabs-302372 .chrome-tab .chrome-tab-close:hover {
-    background-color: #5f6368; /* Dark mode tab close button hover background color */
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path stroke='rgba(255, 255, 255, .7)' stroke-linecap='square' stroke-width='1.5' d='M0 0 L8 8 M8 0 L0 8'></path></svg>");
-}
-
-.chrome-tabs-302372 .chrome-tab .chrome-tab-close:hover:active {
-    background-color: #80868b; /* Dark mode tab close button active background color */
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path stroke='rgba(255, 255, 255, .9)' stroke-linecap='square' stroke-width='1.5' d='M0 0 L8 8 M8 0 L0 8'></path></svg>");
-}
-
-.chrome-tabs-302372.chrome-tabs-dark-theme .chrome-tabs-bottom-bar-100459 {
-    background: #323639; 
-}
-
-body {
-    background-color: #1e1e1e; 
-}
-
- .chrome-tabs-bottom-bar-100459{
-   background-color:#202124;
- }
-
-.browser-bar-497464 {
-  background-color: #2f3136;
-  border-bottom: 1px solid #5a5858;}
-
-.browser-bar-btn-356449 {
-    fill: #8c8c8c;
-    stroke: #ccc;
-    border-radius: 50%;
-    height: 20px;
-    padding: 6px;
-    transition: .2s;
-    width: 20px;
-}
-.addressbar-urlbar-225461 {
-    color:black /* Change the color to your desired color */
+.shortcut:hover {
+  transform: scale(1.05);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
