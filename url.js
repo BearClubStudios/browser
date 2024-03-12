@@ -37,56 +37,34 @@ function encode(str) {
 }; 
 
 
-  function create_url(str) {
-      let nURI = str.trim();
-      console.info(nURI);
+function create_url(str) {
+    let nURI = str.trim();
+    console.info(nURI);
 
-      let searchEngineURL = "https://www.google.com/search?q=";
-      const selectedEngine = document.getElementById('searchEngine').value;
+    const searchEngineURLs = {
+        'duckduckgo': "https://duckduckgo.com/?q=",
+        'bing': "https://www.bing.com/search?q=",
+        'yahoo': "https://search.yahoo.com/search?p=",
+        'brave': "https://search.brave.com/search?q=",
+        'yandex': "https://yandex.com/search/?text=",
+        'ask': "https://www.ask.com/web?q=",
+        'qwant': "https://www.qwant.com/?q=",
+        'naver': "https://search.naver.com/search.naver?query=",
+        'dog': "https://www.dogpile.com/serp?q=",
+        'aol': "https://search.aol.co.uk/aol/search?q="
+    };
 
+    const selectedEngine = document.getElementById('searchEngine').value;
+    let searchEngineURL = searchEngineURLs[selectedEngine] || "https://www.google.com/search?q=";
 
-      // === Search Engines ===
-      if (selectedEngine === 'duckduckgo') {
-          searchEngineURL = "https://duckduckgo.com/?q=";
-      }  
-      if (selectedEngine === 'bing') {
-          searchEngineURL = "https://www.bing.com/search?q=";
-      } 
-      if (selectedEngine === 'yahoo') {
-          searchEngineURL = "https://search.yahoo.com/search?p=";
-      }
-      if (selectedEngine === 'brave') {
-          searchEngineURL = "https://search.brave.com/search?q=";
-      } 
-      if (selectedEngine === 'yandex') {
-          searchEngineURL = "https://yandex.com/search/?text=";
-      }  
-      if (selectedEngine === 'ask') {
-          searchEngineURL = "https://www.ask.com/web?q=";
-      }  
-      if (selectedEngine === 'qwant') {
-          searchEngineURL = "https://www.qwant.com/?q=";
-      } 
-      if (selectedEngine === 'naver') {
-          searchEngineURL = "https://search.naver.com/search.naver?query=";
-      }
-      if (selectedEngine === 'dog') {
-          searchEngineURL = "https://search.aol.co.uk/aol/search?q=";
-      }
-      if (selectedEngine === 'aol') {
-          searchEngineURL = "https://search.aol.co.uk/aol/search?q=";
-      }    
+    if (!isWebsite(nURI)) {
+        console.info("USING SEARCH ENGINE: " + selectedEngine);
+        nURI = searchEngineURL + nURI.replace(/\s+/g, '+');
+    } else if (!nURI.startsWith("http://") && !nURI.startsWith("https://")) {
+        console.info("USING RA URL: " + nURI);
+        nURI = "http://" + nURI;
+    }
 
-      
-      if (!isWebsite(nURI)) {
-          console.info("USING SEARCH ENGINE: " + selectedEngine);
-          
-          nURI = searchEngineURL + nURI.replace(/\s+/g, '+');
-      } else if (!nURI.startsWith("http://") && !nURI.startsWith("https://")) {
-          console.info("USING RA URL: " + nURI);
-          nURI = "http://" + nURI;
-      }
-
-      console.info("FINALISED URL: " + nURI);
-      return nURI;
-  }
+    console.info("FINALISED URL: " + nURI);
+    return nURI;
+}
