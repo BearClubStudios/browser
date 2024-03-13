@@ -29,22 +29,26 @@ document.addEventListener('DOMContentLoaded', function() {
           var shortcutText = this.querySelector('a').textContent.toLowerCase()
           var shortcutshorter=shortcutText.replace(/\s/g, '');
           console.log(`Clicked on: ${shortcutshorter}`);
-
+          shortcut_url = "";
           if (shortcutshorter=="youtube"){
+            shortcut_url = "";
             shortcut_url="https://youtube.com";
-          } else if (shortcutshorter=="cornhub") {
+          }  if (shortcutshorter=="cornhub") {
+            shortcut_url = "";
             shortcut_url="https://www.foodrepublic.com/img/gallery/corn-is-a-fruit-but-its-also-a-grain-and-a-vegetable/intro-1688390573.webp";
-          } else if (shortcutshorter=="wikipedia") {
-            shortcut_url="https://wikipedia.com";
-          } else if (shortcutshorter=="discord") {
+          }  if (shortcutshorter=="netflix") {
+            shortcut_url = "";
+            shortcut_url="https://www.netflix.com";
+          }  if (shortcutshorter=="discord") {
+            shortcut_url = "";
             shortcut_url="https://discord.com";
-          } else if (shortcutshorter=="reddit") {
+          }  if (shortcutshorter=="reddit") {
+            shortcut_url = "";
             shortcut_url="https://reddit.com";
-          } else if (shortcutshorter=="twitch") {
+          } if (shortcutshorter=="twitch") {
+            shortcut_url = "";
             shortcut_url="https://twitch.tv";
-          } else {
-            console.error("Error with shortcuts")
-          }
+          } 
 
           const newTabElement = document.createElement('div');
           newTabElement.className = 'chrome-tab';
@@ -123,7 +127,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // tabsToAdjust.forEach(tab => {
       //     tab.style.width = `${remainingWidth}px`;
       // });
-
+      // console.log(`Remaining width for each tab: ${remainingWidth}px`);    
+            alert("No space for a new tab. Remove a Tab to continue Browsing")
             return false; // There's not enough space for a new tab
         }
 
