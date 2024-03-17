@@ -42,7 +42,6 @@ function create_url(str, faviconurlnum) {
     console.info(nURI);
 
     const searchEngineURLs = {
-        'google' : 'https://www.google.com/search?q=',
         'duckduckgo': "https://duckduckgo.com/?q=",
         'bing': "https://www.bing.com/search?q=",
         'yahoo': "https://search.yahoo.com/search?p=",
