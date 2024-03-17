@@ -73,3 +73,36 @@ function create_url(str, faviconurlnum) {
     console.info("FINALISED URL: " + nURI);
     return nURI;
 }
+
+function create_shortcut(str) {
+  let nURI = str.trim();
+  console.info(nURI);
+
+  const searchEngineURLs = {
+      'duckduckgo': "https://duckduckgo.com/?q=",
+      'bing': "https://www.bing.com/search?q=",
+      'yahoo': "https://search.yahoo.com/search?p=",
+      'brave': "https://search.brave.com/search?q=",
+      'yandex': "https://yandex.com/search/?text=",
+      'ask': "https://www.ask.com/web?q=",
+      'qwant': "https://www.qwant.com/?q=",
+      'naver': "https://search.naver.com/search.naver?query=",
+      'dog': "https://www.dogpile.com/serp?q=",
+      'aol': "https://search.aol.co.uk/aol/search?q="
+  };
+
+  const selectedEngine = document.getElementById('searchEngine').value;
+  let searchEngineURL = searchEngineURLs[selectedEngine] || "https://www.google.com/search?q=";
+ 
+
+  if (!isWebsite(nURI)) {
+      console.info("USING SEARCH ENGINE: " + selectedEngine);
+      nURI = searchEngineURL + nURI.replace(/\s+/g, '+');
+  } else if (!nURI.startsWith("http://") && !nURI.startsWith("https://")) {
+      console.info("USING RA URL: " + nURI);
+      nURI = "http://" + nURI;
+  } 
+
+  console.info("FINALISED URL: " + nURI);
+  return nURI;
+}

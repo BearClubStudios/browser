@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const infoButton = document.querySelector('#info-btn');
   const fbLogo = document.getElementById('fb-logo');
   const shortcuts = document.querySelectorAll('.shortcut');
+  
   let leftCounter = 249;
   let one = 1;
   let tab_title = "New Tab";
@@ -28,28 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
           // Get the text content of the clicked shortcut
           var shortcutText = this.querySelector('a').textContent.toLowerCase()
           var shortcutshorter=shortcutText.replace(/\s/g, '');
-          console.log(`Clicked on: ${shortcutshorter}`);
-          shortcut_url = "";
-          if (shortcutshorter=="youtube"){
-            shortcut_url = "";
-            shortcut_url="https://youtube.com";
-          }  if (shortcutshorter=="cornhub") {
-            shortcut_url = "";
-            shortcut_url="https://www.foodrepublic.com/img/gallery/corn-is-a-fruit-but-its-also-a-grain-and-a-vegetable/intro-1688390573.webp";
-          }  if (shortcutshorter=="netflix") {
-            shortcut_url = "";
-            shortcut_url="https://www.netflix.com";
-          }  if (shortcutshorter=="discord") {
-            shortcut_url = "";
-            shortcut_url="https://discord.com";
-          }  if (shortcutshorter=="reddit") {
-            shortcut_url = "";
-            shortcut_url="https://reddit.com";
-          } if (shortcutshorter=="twitch") {
-            shortcut_url = "";
-            shortcut_url="https://twitch.tv";
-          } 
-
+          console.log(`Clicked on: ${shortcutshorter}`);         
+         
+        
           const newTabElement = document.createElement('div');
           newTabElement.className = 'chrome-tab';
           newTabElement.style = "width: 258px; "
@@ -74,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
           one++;
 
 
-
           // Set the new tab as active
           if (activeTab) {
               activeTab.removeAttribute('active');
@@ -83,7 +64,59 @@ document.addEventListener('DOMContentLoaded', function() {
           activeTab = newTabElement;
           tabNumber = containerDiv.childElementCount - 1; // Assuming the new tab is the last one
           const newIframe = document.createElement('iframe');
-          newIframe.src = "https://p.stonklat.com/uv/service/" + create_url(shortcut_url, tabNumber);
+          shortcut_url = "";
+          favicon_num = containerDiv.childElementCount-1; // Assuming the new tab is the last one
+        
+            if (shortcutshorter=="youtube"){
+                shortcut_url = "";
+               shortcut_url="https://youtube.com";
+               favicon = document.querySelector(`#favicon-container-${favicon_num}`);
+                favicon.innerHTML = `<img id='favicon-${favicon_num+1}' src='./img/links/${shortcutshorter}.svg' height='17px' width='17px'>`;
+              favicon.removeAttribute("hidden");
+            }  
+        
+          if (shortcutshorter=="cornhub") {
+              shortcut_url = "";
+              shortcut_url="https://www.foodrepublic.com/img/gallery/corn-is-a-fruit-but-its-also-a-grain-and-a-vegetable/intro-1688390573.webp";
+              favicon = document.getElementById(`favicon-container-${favicon_num}`);
+              favicon.innerHTML = `<img id='favicon-${favicon_num}' src='./img/links/${shortcutshorter}.png' height='17px' width='17px'>`;
+              favicon.removeAttribute("hidden");
+            }  
+        
+          if (shortcutshorter=="netflix") {
+              shortcut_url = "";
+              shortcut_url="https://www.netflix.com";
+              favicon = document.getElementById(`favicon-container-${favicon_num}`);
+              favicon.innerHTML = `<img id='favicon-${favicon_num}' src='./img/links/${shortcutshorter}.svg' height='17px' width='17px'>`;
+              favicon.removeAttribute("hidden");
+            } 
+        
+          if (shortcutshorter=="discord") {
+              shortcut_url = "";
+              shortcut_url="https://discord.com";
+              favicon = document.getElementById(`favicon-container-${favicon_num}`);
+              favicon.innerHTML = `<img id='favicon-${favicon_num}' src='./img/links/${shortcutshorter}.svg' height='17px' width='17px'>`;
+              favicon.removeAttribute("hidden");
+            }  
+        
+          if (shortcutshorter=="reddit") {
+              shortcut_url = "";
+              shortcut_url="https://reddit.com";
+              favicon = document.getElementById(`favicon-container-${favicon_num}`);
+              favicon.innerHTML = `<img id='favicon-${favicon_num}' src='./img/links/${shortcutshorter}.svg' height='17px' width='17px'>`;
+              favicon.removeAttribute("hidden");            
+            }
+        
+          if (shortcutshorter=="twitch") {
+              shortcut_url = "";
+              shortcut_url="https://twitch.tv";
+              favicon = document.getElementById(`favicon-container-${favicon_num}`);
+              favicon.innerHTML = `<img id='favicon-${favicon_num}' src='./img/links/${shortcutshorter}.svg' height='17px' width='17px'>`;
+              favicon.removeAttribute("hidden");
+            } 
+
+        
+          newIframe.src = "https://p.stonklat.com/uv/service/" + create_shortcut(shortcut_url);
           newIframe.id = `iframe-num-${tabNumber}`;
           newIframe.referpolicy = 'no-referrer';
           newIframe.sandbox = 'allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups  allow-presentation allow-same-origin allow-scripts';
