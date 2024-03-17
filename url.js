@@ -37,11 +37,12 @@ function encode(str) {
 }; 
 
 
-function create_url(str) {
+function create_url(str, faviconurlnum) {
     let nURI = str.trim();
     console.info(nURI);
 
     const searchEngineURLs = {
+        'google' : 'https://www.google.com/search?q=',
         'duckduckgo': "https://duckduckgo.com/?q=",
         'bing': "https://www.bing.com/search?q=",
         'yahoo': "https://search.yahoo.com/search?p=",
@@ -56,15 +57,20 @@ function create_url(str) {
 
     const selectedEngine = document.getElementById('searchEngine').value;
     let searchEngineURL = searchEngineURLs[selectedEngine] || "https://www.google.com/search?q=";
+    let faviconurl= "./img/search_favicons/"+selectedEngine + ".svg"
+    let favicon= document.getElementById(`favicon-container-${faviconurlnum}`)
+    favicon.innerHTML = `<img id='favicon-${faviconurlnum}' src='${faviconurl}' height='17px' width='17px'>`;
+    favicon.removeAttribute("hidden")
 
+  
     if (!isWebsite(nURI)) {
         console.info("USING SEARCH ENGINE: " + selectedEngine);
         nURI = searchEngineURL + nURI.replace(/\s+/g, '+');
     } else if (!nURI.startsWith("http://") && !nURI.startsWith("https://")) {
         console.info("USING RA URL: " + nURI);
         nURI = "http://" + nURI;
-    }
-
+    } 
+   
     console.info("FINALISED URL: " + nURI);
     return nURI;
 }
