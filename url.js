@@ -1,4 +1,5 @@
 const overwrites = {
+  "www.youtube.com": "yt.stonklat.com",
   "youtube.com": "yt.stonklat.com"
 };
 
@@ -28,7 +29,7 @@ function encode(str) {
 
 
 function createURL(str) {
-    const proxy_url = "https://p.stonklat.com/uv/service/"
+    const proxyURL = "https://p.stonklat.com/uv/service/"
     let nURI = str.trim();
     console.info(nURI);
 
@@ -54,14 +55,44 @@ function createURL(str) {
         console.info("USING SEARCH ENGINE: " + selectedEngine);
         nURI = searchEngineURL + nURI.replace(/\s+/g, '+');
     } else if (!nURI.startsWith("http://") && !nURI.startsWith("https://")) {
-        console.info("USING RA URL: " + nURI);
-        nURI = "http://" + nURI;
+        console.info("USING URL: " + nURI);
+        nURI = "https://" + nURI;
     } 
 
-    // Encode the URI
-    nURI = encode(nURI)
+  
+    const matchingKey = Object.keys(overwrites).find(key => nURI.includes(key));
+    if (matchingKey) {
+      console.info(`URI overwritten from "${nURI}" to`)
+      nURI = nURI.replace(matchingKey, overwrites[matchingKey])
+      console.log(nURI)
+    }
+  
 
-    var URL = proxy_url + nURI
+    
+    function getHostnameFromURL(urlString) {
+      var parser = document.createElement('a');
+      parser.href = urlString;
+      var parts = parser.hostname.split('.');
+      if(parts.length > 2) {
+        return parts.slice(1).join('.');
+      } else {
+        return parser.hostname;
+      }
+    }
+  
+    const domain = getHostnameFromURL(nURI);
+    const proxyDomain = getHostnameFromURL(proxyURL);
+  
+
+    if (domain == proxyDomain) {
+      console.info("No need to proxy!")
+      var URL = nURI
+    } else {
+      console.info(`Using ${proxyDomain} as proxy.`)
+      // Encode the URI
+      nURI = encode(nURI)
+      var URL = proxyURL + nURI
+    }
     
     return URL;
 }
