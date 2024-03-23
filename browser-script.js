@@ -1,5 +1,7 @@
 // AFTER WE ARE FINISHED USE https://obfuscator.io/
+
 document.addEventListener('DOMContentLoaded', function() {
+  
   const addressBar = document.querySelector('.addressbar-urlbar-225461');
   const tabContent = document.querySelector('.browser-tab-content-164148');
   const rhNewTab = document.querySelector('.rhpages-357971.rhnewtab-340432');
@@ -20,8 +22,14 @@ document.addEventListener('DOMContentLoaded', function() {
   let activeTab = null;
   let tabNumber = null;
   let shortcut_url = "";
+  let firsttab=null;
 
 
+
+
+
+
+  
 //code For Shortcuts   
   // Add event listener to each shortcut
   shortcuts.forEach(shortcut => {
@@ -30,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
           var shortcutText = this.querySelector('a').textContent.toLowerCase()
           var shortcutshorter=shortcutText.replace(/\s/g, '');
           console.log(`Clicked on: ${shortcutshorter}`);         
-         
         
           const newTabElement = document.createElement('div');
           newTabElement.className = 'chrome-tab';
@@ -39,7 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
           newTabElement.innerHTML = `
                 <div class="chrome-tab-dividers"></div>
                 <div class="chrome-tab-background">
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><symbol id="chrome-tab-geometry-left" viewBox="0 0 214 36"><path d="M17 0h197v36H0v-2c4.5 0 9-3.5 9-8V8c0-4.5 3.5-8 8-8z"></path></symbol><symbol id="chrome-tab-geometry-right" viewBox="0 0 214 36"><use xlink:href="#chrome-tab-geometry-left"></use></symbol><clipPath id="crop"><rect class="mask" width="100%" height="100%" x="0"></rect></clipPath></defs><svg width="52%" height="100%"><use xlink:href="#chrome-tab-geometry-left" width="214" height="36" class="chrome-tab-geometry"></use></svg><g transform="scale(-1, 1)"><svg width="52%" height="100%" x="-100%" y="0"><use xlink:href="#chrome-tab-geometry-right" width="214" height="36" class="chrome-tab-geometry"></use></svg></g></svg>
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <defs><symbol id="chrome-tab-geometry-left" viewBox="0 0 214 36"><path d="M17 0h197v36H0v-2c4.5 0 9-3.5 9-8V8c0-4.5 3.5-8 8-8z"></path></symbol><symbol id="chrome-tab-geometry-right" viewBox="0 0 214 36"><use xlink:href="#chrome-tab-geometry-left"></use></symbol><clipPath id="crop"><rect class="mask" width="100%" height="100%" x="0"></rect></clipPath></defs><svg width="52%" height="100%"><use xlink:href="#chrome-tab-geometry-left" width="214" height="36" class="chrome-tab-geometry"></use></svg><g transform="scale(-1, 1)"><svg width="52%" height="100%" x="-100%" y="0"><use xlink:href="#chrome-tab-geometry-right" width="214" height="36" class="chrome-tab-geometry"></use></svg></g></svg>
                 </div>
                 <div class="chrome-tab-content">
                     <div class='chrome-tab-favicon' id="favicon-container-${one}" hidden="" ><img id="favicon-${one}" src="./img/spinner.gif" height="17px" width="17px"></div>
@@ -48,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="chrome-tab-close" id="close-tab-num-${one}"></div>
                 </div>
             `;
-
           containerDiv.appendChild(newTabElement);
           leftCounter += 239;
           svgElement.style.left = `${leftCounter}px`;
@@ -66,7 +73,11 @@ document.addEventListener('DOMContentLoaded', function() {
           const newIframe = document.createElement('iframe');
           shortcut_url = "";
           favicon_num = containerDiv.childElementCount-1; // Assuming the new tab is the last one
-        
+          function shortcuttext(x,t){
+             favicon.innerHTML = `<img id='favicon-${x}' src='./img/links/${t}.svg' height='17px' width='17px'>`;
+             favicon.removeAttribute("hidden");
+        }
+        //shortcuttext(favicon_num, shortcutshorter )
             if (shortcutshorter=="youtube"){
                 shortcut_url = "";
                shortcut_url="https://youtube.com";
@@ -77,7 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
           if (shortcutshorter=="cornhub") {
               shortcut_url = "";
-              shortcut_url="https://www.foodrepublic.com/img/gallery/corn-is-a-fruit-but-its-also-a-grain-and-a-vegetable/intro-1688390573.webp";
+             // shortcut_url="https://www.foodrepublic.com/img/gallery/corn-is-a-fruit-but-its-also-a-grain-and-a-vegetable/intro-1688390573.webp";
+              shortcut_url="https://i.pinimg.com/736x/32/52/19/325219b7fd5afbf88cdcbfce87c75090.jpg";
               favicon = document.getElementById(`favicon-container-${favicon_num}`);
               favicon.innerHTML = `<img id='favicon-${favicon_num}' src='./img/links/${shortcutshorter}.png' height='17px' width='17px'>`;
               favicon.removeAttribute("hidden");
@@ -116,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } 
 
         
-          newIframe.src = "https://p.stonklat.com/uv/service/" + create_shortcut(shortcut_url);
+          newIframe.src = createURL(shortcut_url, tabNumber);
           newIframe.id = `iframe-num-${tabNumber}`;
           newIframe.referpolicy = 'no-referrer';
           newIframe.sandbox = 'allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups  allow-presentation allow-same-origin allow-scripts';
@@ -139,10 +151,6 @@ document.addEventListener('DOMContentLoaded', function() {
           //         isReloading = true;
           //     }
           // });
-
-
-
-
         
         const existingIframe = document.querySelector(`#iframe-num-${tabNumber}`);
         if (existingIframe) {
@@ -159,26 +167,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+  
+ 
   //adding tab
-  svgElement.addEventListener('click', function() {
+  svgElement.addEventListener('click', function() {   
     const containerWidth = containerDiv.getBoundingClientRect().width;
     let posX3 = event.clientX;
     tabNumber = Math.ceil(posX3 / 239) - 1;
     var n_small = Math.floor(containerWidth / tabNumber);
     console.log("Total available width for the tabs:", n_small-239, "pixels");
     console.log(containerWidth)
-    if (n_small >= 269) {
+    var current_num_Tabs = document.querySelectorAll('.chrome-tab').length;
+    if (n_small >= 269 && !(current_num_Tabs >= 7)) {
            console.log("There's enough space for a new tab")
         } else {
             console.error("No space for a new tab");
-      const numberOfTabs = document.querySelectorAll('.chrome-tab').length;
-      console.log(`Number of tabs: ${numberOfTabs}`);
-      // const tabsToAdjust = document.querySelectorAll('.chrome-tab');
-      // const remainingWidth = n_small / tabsToAdjust.length;
-      // tabsToAdjust.forEach(tab => {
-      //     tab.style.width = `${remainingWidth}px`;
-      // });
-      // console.log(`Remaining width for each tab: ${remainingWidth}px`);    
             alert("No space for a new tab. Remove a Tab to continue Browsing")
             return false; // There's not enough space for a new tab
         }
@@ -210,9 +213,12 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 
+
+  
   containerDiv.addEventListener('click', function(event) {
     if (event.target.classList.contains('chrome-tab-close')) {
       const tabToRemove = event.target.closest('.chrome-tab');
+  
       leftCounter -= 239;
       svgElement.style.left = `${leftCounter}px`;
 
@@ -270,6 +276,15 @@ document.addEventListener('DOMContentLoaded', function() {
         tabNumber = Math.ceil(posX / 239) - 1;
         console.log('Clicked tab number:', tabNumber);
         const existingIframe = document.querySelector(`#iframe-num-${tabNumber}`);
+               if (firsttab!=false) {
+                 const zerodayt = document.querySelector(`#iframe-num-0`);
+                 if(zerodayt){
+                 zerodayt.style.display = 'none';
+                 rhNewTab.style.display = 'block';
+                 }                 
+                 firsttab = false;
+               }
+
         if (existingIframe) {
           existingIframe.style.display = 'block';
           rhNewTab.style.display = 'none';
@@ -281,6 +296,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       } catch (error) {
         console.error('An error occurred in selecting tab:', error);
+      }
+    }
+    if (one > 2) {
+      const previousIframe = document.querySelector(`#iframe-num-${one - 2}`);
+      if (previousIframe) {
+        previousIframe.style.display = 'none';
       }
     }
   });
@@ -335,6 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (event.key === 'Enter' && (activeTab === null || event.target !== addressBar)) {
       alert("Click on a tab to start browsing.");
     } else if (event.key === 'Enter') {
+      
       let url = addressBar.textContent;
       if (url === 'fb://dino') {
         fetch('dino/dino.txt')
@@ -362,8 +384,9 @@ document.addEventListener('DOMContentLoaded', function() {
           })
           .catch(error => console.error('Error fetching document source:', error));
       } else {
+        let url = addressBar.textContent.trim();       
         const newIframe = document.createElement('iframe');
-        newIframe.src = "https://p.stonklat.com/uv/service/" + create_url(url, tabNumber);
+        newIframe.src = createURL(url, tabNumber);
         newIframe.id = `iframe-num-${tabNumber}`;
         newIframe.referpolicy = 'no-referrer';
         newIframe.sandbox = 'allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts';
@@ -375,6 +398,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         welcome.style = "Display:none;";
         addressBar.textContent = " ";
+        const iframeZero = document.querySelector('#iframe-num-0');
+        if (iframeZero && firsttab!=true ) {
+            iframeZero.style.display = 'none';
+        }
         if (activeTab) {
           const tabTitleElement = activeTab.querySelector('.chrome-tab-title');
           if (tabTitleElement) {
@@ -386,6 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+ 
 
 
 
@@ -413,10 +441,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // New System to select a tab when opened which fixes most of previous issues
   const setTab = document.getElementById('tab-num-0');
+  if (firsttab===true || firsttab===null){
+    firsttab= true; 
+    console.log("first tab set")
+  }
   setTab.setAttribute('active', '');
   activeTab = setTab;
-  tabNumber = 0
+  tabNumber = 0;
   console.log('Set tab number:', tabNumber);
+  // const iframe0e = document.querySelector(`#iframe-num-0`);
+  //iframe0e.style.display = 'block';
   const existingIframe = document.querySelector(`#iframe-num-${tabNumber}`);
   if (existingIframe) {
     existingIframe.style.display = 'block';
