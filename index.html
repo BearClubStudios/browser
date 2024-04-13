@@ -17,7 +17,9 @@
     <!-- Linked Scripts -->
     <script src='browser-script.js'></script>
     <script src='url.js'></script>
+    <!-- Libraries -->
     <script src='./lib/valid.min.js'></script> <!-- Validator library for checking URL -->
+    <script src='./lib/jquery-4.0.0.min.js'></script>
 </head>  
     <body>
         <noscript>You're going to need to enable JavaScript to run this browser.</noscript>
@@ -62,7 +64,7 @@
                                 <div class='rhpages-357971 rhnewtab-340432' style='display: block;'>
                                   <div></div><img id="fb-logo" src='./img/black_logo.png' width='200px'><img id="ir-logo" src='./img/ir.png' style="width: 100px !important"><div style='justify-self: end;'></div>
                                 <center>
-                                  <p class='rhnewtab-msg-520849'><b>Infrared 2.1 Browser BETA</b><br>Ultraviolet v3.0.0 Proxy</p>
+                                  <p class='rhnewtab-msg-520849'><b>Infrared 2.1 Browser BETA</b><br>Ultraviolet v2.0.0 Proxy</p>
                                   <p class='rhnewtab-msg-520849'>To Begin Enter your <br> Desired Url in the address abr</p>
                                   <p class="some_small_text">To change to dark mode click the <strong>! key</strong> on your keyboard <br> To Play a game of Dino go to fb://dino</p>
                                 </center> 
@@ -132,7 +134,17 @@
                                           </a>
                                       </div> -->
                                     </div>
-                                  
+                                  <div>
+                                    
+                                    <label class="switch">
+                                              <input type="checkbox" name="colorCheckbox" value="dark">
+                                              <span class="slider round" id="black"></span>
+                                          </label>
+                                    <label class="switch">
+                                              <input type="checkbox" name="colorCheckbox" value="hub">
+                                              <span class="slider round" id="hub"></span>
+                                          </label>
+                                  </div>
                           
                                   <div class='rhnewtab-version-container-485312' hidden=''><p class='rhnewtab-version-number-395166'>Made By: Freedombrowser</p><p class='rhnewtab-version-number-395166'>Backend: Ultraviolet</p></div>
                               </div>

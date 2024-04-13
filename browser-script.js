@@ -1,7 +1,6 @@
 // AFTER WE ARE FINISHED USE https://obfuscator.io/
 
-document.addEventListener('DOMContentLoaded', function() {
-  
+document.addEventListener('DOMContentLoaded', function() {  
   const addressBar = document.querySelector('.addressbar-urlbar-225461');
   const tabContent = document.querySelector('.browser-tab-content-164148');
   const rhNewTab = document.querySelector('.rhpages-357971.rhnewtab-340432');
@@ -24,10 +23,40 @@ document.addEventListener('DOMContentLoaded', function() {
   let shortcut_url = "";
   let firsttab=null;
 
+  
+  function setFavicon(shortcutshorter, favicon_num, shortcut_url) {
+      let favicon = document.getElementById(`favicon-container-${favicon_num}`);
+      let iconPath = `./img/links/${shortcutshorter}.svg`;
 
+      switch (shortcutshorter) {
+          case "youtube":
+              shortcut_url = "https://youtube.com";
+              break;
+          case "cornhub":
+              shortcut_url = "https://i.pinimg.com/736x/32/52/19/325219b7fd5afbf88cdcbfce87c75090.jpg";
+              iconPath = `./img/links/${shortcutshorter}.png`;
+              break;
+          case "netflix":
+              shortcut_url = "https://www.netflix.com";
+              break;
+          case "discord":
+              shortcut_url = "https://discord.com";
+              break;
+          case "reddit":
+              shortcut_url = "https://reddit.com";
+              break;
+          case "twitch":
+              shortcut_url = "https://twitch.tv";
+              break;
+          default:
+              console.error("Unknown shortcut:", shortcutshorter);
+              return;
+      }
 
-
-
+      favicon.innerHTML = `<img id='favicon-${favicon_num+1}' src='${iconPath}' height='17px' width='17px'>`;
+      favicon.removeAttribute("hidden");
+      return shortcut_url;
+  }
 
   
 //code For Shortcuts   
@@ -73,60 +102,11 @@ document.addEventListener('DOMContentLoaded', function() {
           const newIframe = document.createElement('iframe');
           shortcut_url = "";
           favicon_num = containerDiv.childElementCount-1; // Assuming the new tab is the last one
-          function shortcuttext(x,t){
-             favicon.innerHTML = `<img id='favicon-${x}' src='./img/links/${t}.svg' height='17px' width='17px'>`;
-             favicon.removeAttribute("hidden");
+        
+        shortcut_url = "";
+        if (shortcutshorter === "youtube" || shortcutshorter === "cornhub" || shortcutshorter === "netflix" || shortcutshorter === "discord" || shortcutshorter === "reddit" || shortcutshorter === "twitch") {
+            shortcut_url = setFavicon(shortcutshorter, favicon_num, shortcut_url);
         }
-        //shortcuttext(favicon_num, shortcutshorter )
-            if (shortcutshorter=="youtube"){
-                shortcut_url = "";
-               shortcut_url="https://youtube.com";
-               favicon = document.querySelector(`#favicon-container-${favicon_num}`);
-                favicon.innerHTML = `<img id='favicon-${favicon_num+1}' src='./img/links/${shortcutshorter}.svg' height='17px' width='17px'>`;
-              favicon.removeAttribute("hidden");
-            }  
-        
-          if (shortcutshorter=="cornhub") {
-              shortcut_url = "";
-             // shortcut_url="https://www.foodrepublic.com/img/gallery/corn-is-a-fruit-but-its-also-a-grain-and-a-vegetable/intro-1688390573.webp";
-              shortcut_url="https://i.pinimg.com/736x/32/52/19/325219b7fd5afbf88cdcbfce87c75090.jpg";
-              favicon = document.getElementById(`favicon-container-${favicon_num}`);
-              favicon.innerHTML = `<img id='favicon-${favicon_num}' src='./img/links/${shortcutshorter}.png' height='17px' width='17px'>`;
-              favicon.removeAttribute("hidden");
-            }  
-        
-          if (shortcutshorter=="netflix") {
-              shortcut_url = "";
-              shortcut_url="https://www.netflix.com";
-              favicon = document.getElementById(`favicon-container-${favicon_num}`);
-              favicon.innerHTML = `<img id='favicon-${favicon_num}' src='./img/links/${shortcutshorter}.svg' height='17px' width='17px'>`;
-              favicon.removeAttribute("hidden");
-            } 
-        
-          if (shortcutshorter=="discord") {
-              shortcut_url = "";
-              shortcut_url="https://discord.com";
-              favicon = document.getElementById(`favicon-container-${favicon_num}`);
-              favicon.innerHTML = `<img id='favicon-${favicon_num}' src='./img/links/${shortcutshorter}.svg' height='17px' width='17px'>`;
-              favicon.removeAttribute("hidden");
-            }  
-        
-          if (shortcutshorter=="reddit") {
-              shortcut_url = "";
-              shortcut_url="https://reddit.com";
-              favicon = document.getElementById(`favicon-container-${favicon_num}`);
-              favicon.innerHTML = `<img id='favicon-${favicon_num}' src='./img/links/${shortcutshorter}.svg' height='17px' width='17px'>`;
-              favicon.removeAttribute("hidden");            
-            }
-        
-          if (shortcutshorter=="twitch") {
-              shortcut_url = "";
-              shortcut_url="https://twitch.tv";
-              favicon = document.getElementById(`favicon-container-${favicon_num}`);
-              favicon.innerHTML = `<img id='favicon-${favicon_num}' src='./img/links/${shortcutshorter}.svg' height='17px' width='17px'>`;
-              favicon.removeAttribute("hidden");
-            } 
-
         
           newIframe.src = createURL(shortcut_url, tabNumber);
           newIframe.id = `iframe-num-${tabNumber}`;
@@ -153,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
           // });
         
         const existingIframe = document.querySelector(`#iframe-num-${tabNumber}`);
-        if (existingIframe) {
+        if (existingIframe) { 
           existingIframe.style.display = 'block';
           rhNewTab.style.display = 'none';
           tabContent.style.display = 'block';
@@ -265,25 +245,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
       try {
+        if (firsttab!=false) {
+           const zerodayt = document.querySelector(`#iframe-num-0`);
+           if(zerodayt){
+           zerodayt.style.display = 'none';
+           rhNewTab.style.display = 'block';
+           }                 
+           firsttab = false;
+         }
         const clickedTab = event.target.closest('.chrome-tab');
         if (!clickedTab) {
           console.error('Clicked tab not found or no tab there');
           return;
-        }
+        }        
         clickedTab.setAttribute('active', '');
         activeTab = clickedTab;
         let posX = event.clientX;
         tabNumber = Math.ceil(posX / 239) - 1;
         console.log('Clicked tab number:', tabNumber);
         const existingIframe = document.querySelector(`#iframe-num-${tabNumber}`);
-               if (firsttab!=false) {
-                 const zerodayt = document.querySelector(`#iframe-num-0`);
-                 if(zerodayt){
-                 zerodayt.style.display = 'none';
-                 rhNewTab.style.display = 'block';
-                 }                 
-                 firsttab = false;
-               }
 
         if (existingIframe) {
           existingIframe.style.display = 'block';
@@ -318,13 +298,11 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
-
   backButton.addEventListener('click', function() {
     if (activeTab) {
       console.log("back")
     }
   });
-
   forwardButton.addEventListener('click', function() {
     if (activeTab) {
       console.log("forward")
@@ -353,12 +331,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   addressBar.addEventListener('keypress', function(event) {
-    if (event.key === 'Enter' && (activeTab === null || event.target !== addressBar)) {
+    if (event.key === 'Enter' && (activeTab == null || event.target != addressBar)) {
       alert("Click on a tab to start browsing.");
     } else if (event.key === 'Enter') {
       
       let url = addressBar.textContent;
-      if (url === 'fb://dino') {
+      if (url == 'fb://dino') {
         fetch('dino/dino.txt')
           .then(response => response.text())
           .then(docsrc => {
@@ -384,7 +362,9 @@ document.addEventListener('DOMContentLoaded', function() {
           })
           .catch(error => console.error('Error fetching document source:', error));
       } else {
+        // Used when user enters something into address bar
         let url = addressBar.textContent.trim();       
+        updateIframe(url);
         const newIframe = document.createElement('iframe');
         newIframe.src = createURL(url, tabNumber);
         newIframe.id = `iframe-num-${tabNumber}`;
@@ -398,10 +378,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         welcome.style = "Display:none;";
         addressBar.textContent = " ";
-        const iframeZero = document.querySelector('#iframe-num-0');
-        if (iframeZero && firsttab!=true ) {
-            iframeZero.style.display = 'none';
-        }
+        
         if (activeTab) {
           const tabTitleElement = activeTab.querySelector('.chrome-tab-title');
           if (tabTitleElement) {
@@ -414,30 +391,45 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
  
+  function updateIframe(url) {
+      const activeIframe = document.querySelector(`#iframe-num-${tabNumber}`);
+      if (activeIframe) {
+          activeIframe.src = createURL(url);
+        
+      }
+  }
+
+  function changeTheme(colour) {
+      const linkElement = document.querySelector('link[rel="stylesheet"]');
+      if (!linkElement) return; // Guard clause to handle cases where the stylesheet link is not found
+
+      const currentHref = linkElement.getAttribute("href");
+      let newHref;
+      let fbLogoSrc;
+
+      if (colour === "hub") {
+        newHref = currentHref === "css/browser-style.css" ? "css/orange.css" : "css/browser-style.css";
+        fbLogoSrc = currentHref === "css/browser-style.css" ? '/img/white_logo.png' : '/img/black_logo.png'; 
+      } else {
+          newHref = currentHref === "css/browser-style.css" ? "css/browser-style-Darkmode.css" : "css/browser-style.css";
+          fbLogoSrc = currentHref === "css/browser-style.css" ? '/img/white_logo.png' : '/img/black_logo.png';
+      }
+
+      linkElement.setAttribute("href", newHref);
+      fbLogo.src = fbLogoSrc;
+  }
+
+  $('input[type="checkbox"]').click(function() {
+      $('input[type="checkbox"]').not(this).prop("checked", false);
+      var inputValue = $(this).attr("value");
+      $("." + inputValue).toggle().siblings(".box").hide();
+
+      if (inputValue === "normal" || inputValue === "dark" || inputValue === "hub") {
+          changeTheme(inputValue);
+      }
+  });
 
 
-
-  //changes colour of screen by switching css file 
-    document.addEventListener("keydown", function(event) {
-        if (event.key === "!") {
-            const linkElement = document.querySelector('link[rel="stylesheet"]');
-            if (!linkElement) return; // Guard clause to handle cases where the stylesheet link is not found
-            const currentHref = linkElement.getAttribute("href");
-            const newHref = currentHref === "css/browser-style.css" ? "css/browser-style-Darkmode.css" : "css/browser-style.css";
-            linkElement.setAttribute("href", newHref);
-            fbLogo.src = currentHref === "css/browser-style.css" ? '/img/white_logo.png' : '/img/black_logo.png';
-        } else if (event.key === "%") {
-            const linkElement = document.querySelector('link[rel="stylesheet"]');
-            if (!linkElement) return; // Guard clause to handle cases where the stylesheet link is not found
-            const currentHref = linkElement.getAttribute("href");
-            const newHref = currentHref === "css/browser-style.css" ? "./css/orange.css" : "css/browser-style.css";
-            linkElement.setAttribute("href", newHref);
-            fbLogo.src = currentHref === "css/browser-style.css" ? '/img/white_logo.png' : '/img/black_logo.png'; // Adjust the image source accordingly
-        }
-    });
-
-  
-  
 
   // New System to select a tab when opened which fixes most of previous issues
   const setTab = document.getElementById('tab-num-0');
@@ -449,8 +441,6 @@ document.addEventListener('DOMContentLoaded', function() {
   activeTab = setTab;
   tabNumber = 0;
   console.log('Set tab number:', tabNumber);
-  // const iframe0e = document.querySelector(`#iframe-num-0`);
-  //iframe0e.style.display = 'block';
   const existingIframe = document.querySelector(`#iframe-num-${tabNumber}`);
   if (existingIframe) {
     existingIframe.style.display = 'block';
@@ -459,5 +449,41 @@ document.addEventListener('DOMContentLoaded', function() {
   } else {
     rhNewTab.style.display = 'block';
     tabContent.style.display = 'none';
+  };
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const query = urlParams.get('query');
+
+  if (query) {
+    console.log('Query parameter is present:', query);
+
+    
+    let url = query
+    updateIframe(url);
+    const newIframe = document.createElement('iframe');
+    newIframe.src = createURL(url, tabNumber);
+    newIframe.id = `iframe-num-${tabNumber}`;
+    newIframe.referpolicy = 'no-referrer';
+    newIframe.sandbox = 'allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts';
+    newIframe.style.display = 'block';
+    newIframe.className = "browser-tab-content-iframe";
+    tabContent.appendChild(newIframe);
+    tabContent.style.display = 'block';
+    rhNewTab.style.display = 'none';
+
+    welcome.style = "Display:none;";
+    addressBar.textContent = " ";
+
+    if (activeTab) {
+      const tabTitleElement = activeTab.querySelector('.chrome-tab-title');
+      if (tabTitleElement) {
+        tabTitleElement.textContent = url;
+
+      }                                      
+    }
+
+    
   }
+
+  
 }); 
