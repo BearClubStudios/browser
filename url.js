@@ -29,12 +29,12 @@ function encode(str) {
 
 
 function createURL(str) {
-    const proxyURL = "https://p.stonklat.com/uv/service/"
+    const proxyURL = "https://inf.stonklat.com/uv/service/"
     let nURI = str.trim();
     console.info(nURI);
 
     const searchEngineURLs = {
-        'duckduckgo': "https://duckduckgo.com/?q=",
+        'duckduckgo': "https://duckduckgo.com/?k7=w&kt=e&k1=-1&kn=-1&kz=-1&k9=1a0dab&ko=s&q=",
         'bing': "https://www.bing.com/search?q=",
         'yahoo': "https://search.yahoo.com/search?p=",
         'brave': "https://search.brave.com/search?q=",
