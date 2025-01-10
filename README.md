@@ -1,5 +1,11 @@
+> [!IMPORTANT]
+> **This is a FORKED repository and this repository is edited to fit my needs. Credits go to the makers of Freedom Browser!**
+
+
 # Freedombrowser Browser v154
 README.md NOT written by chat gpt "Trust me bro, i did not write this" ~ Chat-GPT 29/2/2023
+
+
 
 ## Description
 This is a web browser application built using HTML, CSS, and JavaScript. It provides basic browsing functionalities such as opening new tabs, navigating to URLs, and refreshing pages.
